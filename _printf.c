@@ -23,6 +23,10 @@ while(format && format[i])
 if (format[i] == '%')
 {
 i++;
+if (format[i] == '\0')
+{
+return (-1);
+}
 if (format[i] == 'c')
 {
 c = (char) va_arg(args, int);
