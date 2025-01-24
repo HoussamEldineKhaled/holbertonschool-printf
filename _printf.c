@@ -11,6 +11,11 @@ int _printf(const char *format, ...)
   va_list args;
 
   va_start(args, format);
+
+  if (!format)
+    {
+      return (-1);
+    }
   while(format && format[i])
     {
       if (format[i] == '%')
@@ -25,6 +30,10 @@ int _printf(const char *format, ...)
 	  else if (format[i] == 's')
 	    {
 	      s = va_arg(args, char *);
+	      if (!s)
+		{
+		  s = "(null)";
+		}
 	      while (*s)
 		{
 		  write(1, s, 1);
