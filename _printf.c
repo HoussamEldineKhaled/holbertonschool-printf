@@ -31,9 +31,7 @@ else if (format[i] == 's')
 {
 s = va_arg(args, char *);
 if (!s)
-{
 s = "(null)";
-}
 while (*s)
 {
 write(1, s, 1);
