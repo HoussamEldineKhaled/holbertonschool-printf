@@ -2,18 +2,18 @@
 #include <stdarg.h>
 #include <unistd.h>
 /**
- * _printf - printing s, c, and %
+ * increase - increase count
+ * @count: counter
+ * @i: iterator
+ * @c: character
+ * @s: string
  * @format: string format
+ * @args: arguments
  * Return: -1 or count
 */
-int _printf(const char *format, ...)
+int increase(int count, int i, char c, char *s,
+const char *format, va_list args)
 {
-int i = 0;
-int count = 0;
-char c;
-char *s;
-va_list args;
-va_start(args, format);
 if (!format)
 {
 return (-1);
@@ -66,6 +66,22 @@ count++;
 }
 i++;
 }
+return (count);
+}
+/**
+ * _printf - printing s, c, and %
+ * @format: string format
+ * Return: -1 or count
+*/
+int _printf(const char *format, ...)
+{
+int i = 0;
+int count = 0;
+char c;
+char *s;
+va_list args;
+va_start(args, format);
+count = increase(count, i, c, s, format, args);
 va_end(args);
 return (count);
 }
