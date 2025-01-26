@@ -5,15 +5,17 @@
  * increase - increase count
  * @count: counter
  * @i: iterator
+ * @numb: integer
  * @c: character
  * @s: string
  * @format: string format
  * @args: arguments
  * Return: -1 or count
 */
-int increase(int count, int i, char c, char *s,
+int increase(int count, int i, int numb, char c, char *s,
 const char *format, va_list args)
 {
+char buffer[12];
 while (format && format[i])
 {
 if (format[i] == '%')
@@ -26,6 +28,11 @@ if (format[i] == 'c')
 c = (char) va_arg(args, int);
 write(1, &c, 1);
 count++;
+}
+else if (format[i] == 'd' || format[i] == 'i')
+{
+  num = va_arg(args, int);
+  
 }
 else if (format[i] == 's')
 {
@@ -71,13 +78,14 @@ int i = 0;
 int count = 0;
 char c = 'a';
 char *s = "";
+int num = 0;
 va_list args;
 va_start(args, format);
 if (!format)
 {
 return (-1);
 }
-count = increase(count, i, c, s, format, args);
+count = increase(count, i, num, c, s, format, args);
 va_end(args);
 return (count);
 }
