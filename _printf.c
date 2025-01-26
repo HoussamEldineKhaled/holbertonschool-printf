@@ -77,8 +77,8 @@ int _printf(const char *format, ...)
 {
 int i = 0;
 int count = 0;
-char c;
-char *s;
+char c = 'a';
+char *s = "";
 va_list args;
 va_start(args, format);
 count = increase(count, i, c, s, format, args);
