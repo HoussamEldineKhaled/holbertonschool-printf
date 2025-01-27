@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
+#include <limits.h>
 /**
  * increase - increase count
  * @count: counter
@@ -34,10 +35,22 @@ else if (format[i] == 'd' || format[i] == 'i')
 {
 numb = va_arg(args, int);
 j = 0;
-if (numb < 0)
+if (numb == 0)
+{
+buffer[j++] = '0';
+} 
+else if (numb < 0)
 {
 isnegative = 1;
+if (numb == INT_MIN)
+{
+buffer[j++] = '8';
+numb = -(numb / 10);
+}
+else
+{
 numb = -numb;
+}
 }
 while (numb > 0)
 {
