@@ -15,6 +15,7 @@
 int increase(int count, int i, int numb, char c, char *s,
 const char *format, va_list args)
 {
+int j, isnegative = 0;
 char buffer[12];
 while (format && format[i])
 {
@@ -31,8 +32,27 @@ count++;
 }
 else if (format[i] == 'd' || format[i] == 'i')
 {
-  num = va_arg(args, int);
-  
+numb = va_arg(args, int);
+j = 0;
+if (numb < 0)
+{
+isnegative = 1;
+numb = -numb;
+}
+while (numb > 0)
+{
+buffer[j++] = (numb % 10) + '0';
+numb /= 10;
+}
+if (isnegative)
+{
+buffer[j++] = '-';
+}
+while (j > 0)
+{
+write(1, &buffer[--j], 1);
+count++;     
+}
 }
 else if (format[i] == 's')
 {
